@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "computershop", "computershop\computershop.csproj", "{471042A8-137D-4F26-BC4A-22407EC474F9}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Compustore Setup", "Compustore Setup\Compustore Setup.vdproj", "{7139E984-82EA-4FED-A247-3C94767CFEC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{471042A8-137D-4F26-BC4A-22407EC474F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{471042A8-137D-4F26-BC4A-22407EC474F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{471042A8-137D-4F26-BC4A-22407EC474F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{471042A8-137D-4F26-BC4A-22407EC474F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7139E984-82EA-4FED-A247-3C94767CFEC5}.Debug|Any CPU.ActiveCfg = Debug
+		{7139E984-82EA-4FED-A247-3C94767CFEC5}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2AE44B1B-8877-4261-B2ED-46F25000D32C}
+	EndGlobalSection
+EndGlobal

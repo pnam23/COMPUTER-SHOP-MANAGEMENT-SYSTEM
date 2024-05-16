@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\3d-computer.png" />
+    <None Remove="Images\background-login.jpg" />
+    <None Remove="Images\key.png" />
+    <None Remove="Images\Products\acerchromebook713.jpeg" />
+    <None Remove="Images\Products\acernitro5.jpeg" />
+    <None Remove="Images\Products\asusrogzephyrusg14.jpeg" />
+    <None Remove="Images\Products\asuszenbook14.jpeg" />
+    <None Remove="Images\Products\dellg15.jpeg" />
+    <None Remove="Images\Products\dellinspiront7430.jpeg" />
+    <None Remove="Images\Products\dellxps13.jpeg" />
+    <None Remove="Images\Products\galaxybookpro360.jpeg" />
+    <None Remove="Images\Products\hpenvy13.jpeg" />
+    <None Remove="Images\Products\hppavilionx360.jpeg" />
+    <None Remove="Images\Products\hpspectrex360.jpeg" />
+    <None Remove="Images\Products\idealpad5.jpeg" />
+    <None Remove="Images\Products\inspiron15.jpeg" />
+    <None Remove="Images\Products\legion5.jpeg" />
+    <None Remove="Images\Products\lenovoyoga9i.jpeg" />
+    <None Remove="Images\Products\lggram17.jpeg" />
+    <None Remove="Images\Products\macbookair.jpeg" />
+    <None Remove="Images\Products\macpro.jpeg" />
+    <None Remove="Images\Products\macpro16.jpeg" />
+    <None Remove="Images\Products\msigf63.jpeg" />
+    <None Remove="Images\Products\picture.png" />
+    <None Remove="Images\Products\predatorhelios300.jpeg" />
+    <None Remove="Images\Products\razerblade15.jpeg" />
+    <None Remove="Images\Products\surface4.jpeg" />
+    <None Remove="Images\Products\surfacepro8.jpeg" />
+    <None Remove="Images\Products\thinkpadx1carbon.jpeg" />
+    <None Remove="Images\Products\vivobook15.jpeg" />
+    <None Remove="Images\Products\zenbookduo.jpeg" />
+    <None Remove="Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.1.1" />
+    <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\3d-computer.png" />
+    <Resource Include="Images\background-login.jpg" />
+    <Resource Include="Images\key.png" />
+    <Resource Include="Images\Products\acerchromebook713.jpeg" />
+    <Resource Include="Images\Products\acernitro5.jpeg" />
+    <Resource Include="Images\Products\asusrogzephyrusg14.jpeg" />
+    <Resource Include="Images\Products\asuszenbook14.jpeg" />
+    <Resource Include="Images\Products\dellg15.jpeg" />
+    <Resource Include="Images\Products\dellinspiront7430.jpeg" />
+    <Resource Include="Images\Products\dellxps13.jpeg" />
+    <Resource Include="Images\Products\galaxybookpro360.jpeg" />
+    <Resource Include="Images\Products\hpenvy13.jpeg" />
+    <Resource Include="Images\Products\hppavilionx360.jpeg" />
+    <Resource Include="Images\Products\hpspectrex360.jpeg" />
+    <Resource Include="Images\Products\idealpad5.jpeg" />
+    <Resource Include="Images\Products\inspiron15.jpeg" />
+    <Resource Include="Images\Products\legion5.jpeg" />
+    <Resource Include="Images\Products\lenovoyoga9i.jpeg" />
+    <Resource Include="Images\Products\lggram17.jpeg" />
+    <Resource Include="Images\Products\macbookair.jpeg" />
+    <Resource Include="Images\Products\macpro.jpeg" />
+    <Resource Include="Images\Products\macpro16.jpeg" />
+    <Resource Include="Images\Products\msigf63.jpeg" />
+    <Resource Include="Images\Products\picture.png" />
+    <Resource Include="Images\Products\predatorhelios300.jpeg" />
+    <Resource Include="Images\Products\razerblade15.jpeg" />
+    <Resource Include="Images\Products\surface4.jpeg" />
+    <Resource Include="Images\Products\surfacepro8.jpeg" />
+    <Resource Include="Images\Products\thinkpadx1carbon.jpeg" />
+    <Resource Include="Images\Products\vivobook15.jpeg" />
+    <Resource Include="Images\Products\zenbookduo.jpeg" />
+    <Resource Include="Images\user.png" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,1011 @@
+﻿<UserControl x:Class="computershop.View.ProductWindowUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:computershop.View"
+             xmlns:viewModel="clr-namespace:computershop.ViewModel"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="1000">
+
+    <UserControl.DataContext>
+        <viewModel:ProductViewModel/>
+    </UserControl.DataContext>
+
+
+    <Grid>
+
+        <Grid  Visibility="{Binding ProductGridVisibility}" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height ="35"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" VerticalAlignment="Center">
+                <Button x:Name="btnAdd"
+                            Width="80"
+                            Foreground="White"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,130,0"
+                            Command="{Binding ShowAddViewCommand}"
+                        Style="{StaticResource actionButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Plus" 
+  Height="20" 
+ Width="20" 
+ Foreground="white"/>
+                        <TextBlock Text="Add"
+Foreground="white"
+FontFamily="montserrat"
+FontWeight="Medium"
+Margin="10 0 0 0"
+VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Command="{Binding ImportDataCommand}"
+                        
+                    Width="80"
+                    Foreground="White"
+                        FontWeight="Medium"
+                    HorizontalAlignment="Left"
+                        Margin="910,-1,0,1" Style="{StaticResource actionButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="FileImport" 
+  Height="20" 
+ Width="20" 
+ Foreground="white"/>
+                        <TextBlock Text="Import"
+Foreground="white"
+FontFamily="montserrat"
+FontWeight="Medium"
+Margin="10 0 0 0"
+VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+
+            <Grid Grid.Row="1">
+
+                <StackPanel Orientation="Horizontal"
+                VerticalAlignment="Center"
+                Grid.Column="0" HorizontalAlignment="Left" Width="1000">
+                    <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainText3}"
+                              Margin="10 0 0 0"
+                              VerticalAlignment="Bottom"/>
+                    <TextBox Text="{Binding NameOfProduct}" 
+                        FontSize="13"
+                        Height="24"
+                        Width="300"
+                        Background="Transparent"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat"                            
+                        Foreground="{StaticResource plainText3}"
+                        CaretBrush="{StaticResource plainText3}"
+                        BorderBrush="{StaticResource plainText3}"
+                        BorderThickness="0,0,0,1"                             
+                        VerticalContentAlignment="Center"
+                        Margin="5,5,0,0"></TextBox>
+                    <Button Grid.Column="1"
+                            HorizontalAlignment="Right"
+                        Command="{Binding SearchCommand}"
+                        Content="Search"                            
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"
+                        BorderThickness="0"
+                        Foreground="White"
+                        Width="100"
+                            FontWeight="Medium"
+                        Margin="0 0 20 0"
+                            Style="{StaticResource actionButton}">
+                    </Button>
+                    <TextBlock Text="Brand"
+                           Foreground="White"
+                           FontSize="16"
+                           FontWeight="Medium"
+                           FontFamily="Montserrat"
+                           VerticalAlignment="Center"
+                           Margin="0 0 10 0"
+                           Grid.Column="2"/>
+                    <ComboBox Name="cmbBrand"
+                          Width="150"
+                          ItemsSource="{Binding Brands}"
+                          SelectedItem="{Binding SelectedBrand}"
+                          VerticalAlignment="Center"
+                        DisplayMemberPath="Name"
+                              SelectionChanged="cmbBrand_SelectionChanged"
+                              >
+                    </ComboBox>
+
+                    <TextBlock Text="Filter by"
+                           Foreground="White"
+                           FontSize="16"
+                           FontWeight="Medium"
+                           FontFamily="Montserrat"
+                           VerticalAlignment="Center"
+                           Grid.Column="3"
+                           Margin="10 0 0 0"/>
+
+                    <ComboBox Name="cmbFilter"
+                          Width="150"
+                          ItemsSource="{Binding Filters}"
+                              SelectedItem="{Binding SelectedFilter}"
+                          Margin="10 0 0 0"
+                          VerticalAlignment="Center"
+                              SelectionChanged="cmbFilter_SelectionChanged"
+                              SelectedIndex="3">
+                    </ComboBox>
+
+                    <Button Command="{Binding ResetCommand}"
+                        Width="90"
+                        Margin="15 0 0 0"
+                        Grid.Column="4"
+                        Foreground="White"
+                            Style="{StaticResource actionButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Rotate" 
+  Height="20" 
+ Width="20" 
+ Foreground="white"/>
+                            <TextBlock Text="Reset"
+Foreground="white"
+FontFamily="montserrat"
+FontWeight="Medium"
+Margin="10 0 0 0"
+VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+
+                </StackPanel>
+            </Grid>
+
+
+            <Border 
+        Background="#200F53"
+        CornerRadius="10" 
+        Padding="10"
+              Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="311*"/>
+                        <ColumnDefinition Width="689*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView ItemsSource="{Binding ListProducts}"
+                              SelectedItem="{Binding SelectedItem}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Background="Transparent"
+                      BorderThickness ="0"
+                      Width="1000"
+                        Grid.ColumnSpan="2"
+                              MouseDoubleClick="ListView_MouseDoubleClick">
+
+
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Width="1000"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <Image Width="150" Height="100" 
+                                           Source="{Binding Avatar}" 
+                                           Margin="0, 0, 0, 10"
+                                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    <TextBlock Text="{Binding Brand}"
+                                       FontWeight="Medium" 
+                                       Foreground="White"
+                                       FontSize="16"
+                                       FontFamily="Montserrat"></TextBlock>
+                                    <TextBlock Text="{Binding Name}"  
+                                       FontWeight="Medium" 
+                                       Foreground="LightGray"
+                                       FontSize="13"
+                                       FontFamily="Montserrat" ></TextBlock>
+
+                                    <TextBlock>
+                                       <Run Text="$ "
+                                            FontWeight="Medium" 
+                                             Foreground="Cyan"
+                                             FontSize="16"
+                                             FontFamily="Montserrat"/>
+                                        <Run Text="{Binding SalePrice}" 
+                                       FontWeight="Medium" 
+                                        Foreground="Cyan"
+                                        FontSize="16"
+                                        FontFamily="Montserrat"/>
+                                    </TextBlock>
+
+                                    <TextBlock  Text="{Binding Status}"
+             FontSize="12"
+             FontFamily="Montserrat">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="Red" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Available">
+                                                        <Setter Property="Foreground" Value="GreenYellow" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Width" Value="200"/>
+                                <Setter Property="Height" Value="200"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                    </ListView>
+                    <TextBox Text="{Binding ErrorMessage}"
+                     FontFamily="Montserrat"
+                     FontSize="16"
+                     FontWeight="Medium"
+                     Foreground="red"
+                             Background="Transparent"
+                             Width="500"
+                             Height="25"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Left"
+                             Margin="20,20,0,0"
+                             BorderThickness="0" Grid.ColumnSpan="2"/>
+
+
+                </Grid>
+            </Border>
+            <Grid Grid.Row="3">
+                <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0"
+                    Height="30">
+                    <TextBlock Text="Showing"
+                               FontSize="16"
+FontWeight="Medium"
+FontFamily="Montserrat"
+Foreground="#BCBEE0"
+    Margin="10 0 0 0"
+                               VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding ItemsPerPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+Background="Transparent"
+BorderThickness="01 01 01 1"
+d:Text="?"
+  FontSize="16"
+  FontWeight="Medium"
+  FontFamily="Montserrat"
+  Foreground="#BCBEE0"
+                             Width="30"
+                             VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             CaretBrush="LightGray"
+                             Margin="10 0 0 0"/>
+                    <TextBlock Text="of"
+                               VerticalAlignment="Center"
+                               FontSize="16"
+FontWeight="Medium"
+FontFamily="Montserrat"
+Foreground="#BCBEE0"
+    Margin="10 0 0 0"/>
+
+                    <TextBlock 
+                 Background="Transparent"
+                 d:Text="?"
+                        Text="{Binding TotalItems}"
+                   FontSize="16"
+                   FontWeight="Medium"
+                   FontFamily="Montserrat"
+                   Foreground="#BCBEE0"
+                     Margin="10 0 0 0"
+                   VerticalAlignment="Center"/>
+                    <TextBlock Text="items"
+                               VerticalAlignment="Center"
+FontSize="16"
+FontWeight="Medium"
+FontFamily="Montserrat"
+Foreground="#BCBEE0"
+    Margin="10 0 0 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+    VerticalAlignment="Center"
+    HorizontalAlignment="Right"
+    Margin="0 0 10 0"
+    >
+                    <Button
+            Command="{Binding PrevPageCommand}"
+            Width="30"
+        Content="&lt;"
+    Foreground="White"
+            Style="{StaticResource actionButton}"/>
+
+                    <TextBlock 
+     Background="Transparent"
+     FontSize="16"
+    FontWeight="Medium"
+    FontFamily="Montserrat"
+    Foreground="#BCBEE0"
+     d:Text="10"
+        Width="15"
+     Text="{Binding CurrentPageDisplay}"
+     HorizontalAlignment="Center"
+     Margin="10 5 10 5"/>
+                    <TextBlock Text="of" 
+       Background="Transparent"
+  FontSize="16"
+ FontWeight="Medium"
+ FontFamily="Montserrat"
+ Foreground="#BCBEE0"
+               
+       Margin="10 5 10 5"/>
+                    <TextBlock
+     Background="Transparent"
+     Text="{Binding TotalPages}"
+     FontSize="16"
+    FontWeight="Medium"
+    FontFamily="Montserrat"
+    Foreground="#BCBEE0"
+     d:Text="10"
+     Margin="10 5 10 5"
+     IsEnabled="False"/>
+
+                    <Button 
+            Command="{Binding NextPageCommand}"
+            Width="30"
+    Content="&gt;"
+    Foreground="White"
+            Style="{StaticResource actionButton}"/>
+
+
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+
+        <Grid  Visibility="{Binding AddProductGridVisibility}"  Grid.ColumnSpan="2"
+                 >
+            <Border Grid.Row="1"
+        Background="Transparent"
+        CornerRadius="20" 
+        Padding="50"
+        BorderBrush="#773DFF"
+        BorderThickness="2"
+        Margin="0">
+                <Grid Margin="-40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="ADD PRODUCT"
+                           FontSize="30"
+                           FontFamily="MONTSERRAT"
+                           FontWeight="DemiBold"
+                           Foreground="{StaticResource ResourceKey=title1}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Grid.Row="0"
+                           Grid.Column="1"/>
+
+                    <Button Command="{Binding BackFromAddView}"
+                        Grid.Row="0" 
+                        Grid.Column="2" 
+                        Foreground="White"
+                        Width="30"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                            Style="{StaticResource actionButton}">
+                        <fa:IconImage Icon="CircleLeft" Width="20"
+                                      Height="20"
+                                      Foreground="White"/>
+                    </Button>
+
+                    <TextBlock Text="Product Name:"
+                           Height="25"
+                           FontSize="14"
+                           FontFamily="monserrat"
+                           FontWeight="Medium"
+                           Foreground="DarkGray"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="center"
+                           Margin="20 10 0 0"/>
+
+                    <TextBox Text= "{Binding NewProductName}"
+                         FontSize="14"
+                         Height="24"
+                         Width="180"
+                         Background="Transparent"
+                         FontWeight="Medium"
+                         FontFamily="Montserrat"                            
+                         Foreground="{StaticResource plainText3}"
+                         CaretBrush="{StaticResource plainText3}"
+                         BorderBrush="{StaticResource plainText3}"
+                         BorderThickness="0,0,0,1"                             
+                         VerticalContentAlignment="Center"
+                         HorizontalAlignment="Right"
+                         Margin="0,0,20,0"
+                         Grid.Column="0"
+                         Grid.Row="1"></TextBox>
+
+                    <TextBlock Text="Brand:"
+                            Height="25"
+                            FontSize="14"
+                            FontFamily="monserrat"
+                            FontWeight="Medium"
+                            Foreground="DarkGray"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="center"
+                            Margin="50 10 0 0"/>
+
+                    <ComboBox Name="cmbProductBrand"
+                          Grid.Column="1"
+                          Grid.Row="1"
+                          Width="170"
+                          Height="25"
+                          ItemsSource="{Binding Brands}"
+                              SelectedItem="{Binding SelectedProductBrand}"
+                              DisplayMemberPath="Name"
+                          HorizontalAlignment="Right"
+                          Margin="0,0, 50,0"/>
+
+                    <TextBlock Text="Capital ( $ ):"
+                           Height="25"
+                           FontSize="14"
+                           FontFamily="monserrat"
+                           FontWeight="Medium"
+                           Foreground="DarkGray"
+                           Grid.Row="1"
+                           Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="center"
+                           Margin="50 10 0 0"/>
+
+                    <TextBox Text= "{Binding NewProductCapital}"
+                        FontSize="14"
+                        Height="24"
+                        Width="170"
+                        Background="Transparent"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat"                            
+                        Foreground="{StaticResource plainText3}"
+                        CaretBrush="{StaticResource plainText3}"
+                        BorderBrush="{StaticResource plainText3}"
+                        BorderThickness="0,0,0,1"                             
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,20,0"
+                        Grid.Column="2"
+                        Grid.Row="1"></TextBox>
+
+                    <TextBlock Text="Description:"
+       Height="25"
+       FontSize="14"
+       FontFamily="monserrat"
+       FontWeight="Medium"
+       Foreground="DarkGray"
+       Grid.Row="2"
+       Grid.Column="0"
+       HorizontalAlignment="Left"
+       VerticalAlignment="Center"
+       Margin="20 0 0 0"/>
+
+                    <TextBox Text="{Binding NewProductDescription}"
+      FontSize="14"
+      Height="24"
+      Width="200"
+      Background="Transparent"
+      FontWeight="Medium"
+      FontFamily="Montserrat"                            
+      Foreground="{StaticResource plainText3}"
+      CaretBrush="{StaticResource plainText3}"
+      BorderBrush="{StaticResource plainText3}"
+      BorderThickness="0,0,0,1"                             
+      VerticalContentAlignment="Center"
+      HorizontalAlignment="Right"
+      Margin="0,00,20,0"
+      Grid.Column="0"
+      Grid.Row="2"></TextBox>
+
+
+
+                    <TextBlock Text="Quantity:"
+                          Height="25"
+                          FontSize="14"
+                          FontFamily="monserrat"
+                          FontWeight="Medium"
+                          Foreground="DarkGray"
+                          Grid.Row="3"
+                          Grid.Column="0"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Margin="20 20 0 0"/>
+
+                    <TextBox Text="{Binding NewProductQuantity}"
+                         FontSize="14"
+                         Height="24"
+                         Width="215"
+                         Background="Transparent"
+                         FontWeight="Medium"
+                         FontFamily="Montserrat"                            
+                         Foreground="{StaticResource plainText3}"
+                         CaretBrush="{StaticResource plainText3}"
+                         BorderBrush="{StaticResource plainText3}"
+                         BorderThickness="0,0,0,1"                             
+                         VerticalContentAlignment="Center"
+                             VerticalAlignment="Top"
+                         HorizontalAlignment="Right"
+                         Margin="0,20,20,0"
+                         Grid.Column="0"
+                         Grid.Row="3"></TextBox>
+
+
+                    <TextBlock Text="Sale price ( $ ):"
+                          Height="25"
+                          FontSize="14"
+                          FontFamily="monserrat"
+                          FontWeight="Medium"
+                          Foreground="DarkGray"
+                          Grid.Row="2"
+                          Grid.Column="2"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="center"
+                          Margin="50 10 0 0"/>
+
+                    <TextBox Text="{Binding NewProductSalePrice}"
+                       FontSize="14"
+                       Height="24"
+                       Width="150"
+                       Background="Transparent"
+                       FontWeight="Medium"
+                       FontFamily="Montserrat"                            
+                       Foreground="{StaticResource plainText3}"
+                       CaretBrush="{StaticResource plainText3}"
+                       BorderBrush="{StaticResource plainText3}"
+                       BorderThickness="0,0,0,1"                             
+                       VerticalContentAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Margin="0,0,20,0"
+                       Grid.Column="2"
+                       Grid.Row="2"></TextBox>
+
+                    <TextBlock Text="Status:"
+                            Height="25"
+                            FontSize="14"
+                            FontFamily="monserrat"
+                            FontWeight="Medium"
+                            Foreground="DarkGray"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="center"
+                            Margin="50 10 0 0"/>
+
+                    <ComboBox Name="cmbProductStatus"
+                          Grid.Column="1"
+                          Grid.Row="2"
+                          Width="170"
+                          Height="25"
+                          ItemsSource="{Binding ProductStatus}"
+                              SelectedItem="{Binding SelectedProductStatus}"
+                          HorizontalAlignment="Right"
+                          Margin="0,0, 50,0"/>
+
+                    <Button Grid.Column="1"
+                            Grid.Row="3"
+                            Command="{Binding BrowseImageCommand}"
+                            Height="35"
+                            Width="200"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                         VerticalAlignment="Top"
+                            Margin="0 10 0 0">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Plus" 
+                                     Height="25" 
+                                    Width="20" 
+                                    Foreground="{StaticResource plainText3}"/>
+                            <TextBlock Text="Add product image"
+                                   Foreground="{StaticResource plainText3}"
+                                   FontSize="14"
+                                   FontFamily="montserrat"
+                                   FontWeight="Medium"
+                                   Margin="10 0 0 0"
+                                   VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+
+
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                       Grid.Column="1"
+                       Grid.Row="3"
+                       Width="200"
+                       Height="180"
+                       VerticalAlignment="Top"
+                           HorizontalAlignment="Center"
+                       Source="{Binding SelectedImageSource}" 
+                           Margin="0,50,0,0"/>
+
+                    <Button Grid.Column="1"
+                        Grid.Row="3"
+                        Width="150"
+                        Height="35"
+                        Content="Add"
+                        Command="{Binding AddProductCommand}"
+                        VerticalAlignment="Bottom"
+                        Margin="0 0 0 10"
+                        Cursor="Hand"
+                        Foreground="LightGray"
+                            Style="{StaticResource actionButton}">
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid d:Visibility="Visible" Visibility="{Binding UpdateProductGridVisibility}" Grid.ColumnSpan="2">
+            <Border Grid.Row="1"
+                    Background="Transparent"
+                    CornerRadius="20" 
+                    Padding="50"
+                    BorderBrush="#773DFF"
+                    BorderThickness="2"
+                    Margin="0">
+                <Grid Margin="-40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="PRODUCT DETAIL"
+                          FontSize="30"
+                          FontFamily="MONTSERRAT"
+                          FontWeight="DemiBold"
+                          Foreground="{StaticResource ResourceKey=title1}"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Grid.Row="0"
+                          Grid.Column="1"/>
+
+                    <Button Command="{Binding BackFromUpdateView}"
+                       Grid.Row="0" 
+                       Grid.Column="2" 
+                       Foreground="White"
+                       Width="30"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                            Style="{StaticResource actionButton}">
+                        <fa:IconImage Icon="CircleLeft" Width="20"
+                                     Height="20"
+                                      Foreground="White"/>
+                    </Button>
+
+
+                    <TextBlock Text="Product Name:"
+                          Height="25"
+                          FontSize="14"
+                          FontFamily="monserrat"
+                          FontWeight="Medium"
+                          Foreground="DarkGray"
+                          Grid.Row="1"
+                          Grid.Column="0"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="center"
+                          Margin="20 10 0 0"/>
+
+                    <TextBox Text="{Binding CurrentName}" 
+                        Name="txtProductName"
+                        FontSize="14"
+                        Height="24"
+                        Width="180"
+                        Background="Transparent"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat"                            
+                        Foreground="{StaticResource plainText3}"
+                        CaretBrush="{StaticResource plainText3}"
+                        BorderBrush="{StaticResource plainText3}"
+                        BorderThickness="0,0,0,1"                             
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,20,0"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                             IsEnabled="False"></TextBox>
+
+                    <TextBlock Text="Status:"
+      Height="25"
+      FontSize="14"
+      FontFamily="monserrat"
+      FontWeight="Medium"
+      Foreground="DarkGray"
+      Grid.Row="1"
+      Grid.Column="1"
+      HorizontalAlignment="Left"
+      VerticalAlignment="center"
+      Margin="20 10 0 0"/>
+
+                    <ComboBox 
+      Grid.Column="1"
+      Grid.Row="1"
+      Width="215"
+      Height="25"
+      ItemsSource="{Binding ProductStatus}"
+          SelectedItem="{Binding CurrentStatus}"
+      HorizontalAlignment="Left"
+      Margin="91,32,0,30"/>
+
+                    <TextBlock Text="Description:"
+                              Height="25"
+                              FontSize="14"
+                              FontFamily="monserrat"
+                              FontWeight="Medium"
+                              Foreground="DarkGray"
+                              Grid.Row="4"
+                              Grid.Column="0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Margin="20 0 0 0"/>
+
+                    <TextBox Text="{Binding CurrentDescription}" 
+                             Name="txtProductDesciption"
+                             FontSize="14"
+                             Height="24"
+                             Width="526"
+                             Background="Transparent"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"                            
+                             Foreground="{StaticResource plainText3}"
+                             CaretBrush="{StaticResource plainText3}"
+                             BorderBrush="{StaticResource plainText3}"
+                             BorderThickness="0,0,0,1"                             
+                             VerticalContentAlignment="Center"
+                             HorizontalAlignment="Left"
+                             Margin="105,31,0,32"
+                             Grid.Column="0"
+                             Grid.Row="4" Grid.ColumnSpan="2"></TextBox>
+
+                    <TextBlock Text="In Stock:"
+                          Height="25"
+                          FontSize="14"
+                          FontFamily="monserrat"
+                          FontWeight="Medium"
+                          Foreground="DarkGray"
+                          Grid.Row="2"
+                          Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Margin="20 0 0 0"/>
+
+                    <TextBox Text="{Binding CurrentQuantity}" 
+                         Name="txtQuantity"
+                         FontSize="14"
+                         Height="24"
+                         Width="215"
+                         Background="Transparent"
+                         FontWeight="Medium"
+                         FontFamily="Montserrat"                            
+                         Foreground="{StaticResource plainText3}"
+                         CaretBrush="{StaticResource plainText3}"
+                         BorderBrush="{StaticResource plainText3}"
+                         BorderThickness="0,0,0,1"                             
+                         VerticalContentAlignment="Center"
+                             VerticalAlignment="Center"
+                         HorizontalAlignment="Right"
+                         Margin="0,0,20,0"
+                         Grid.Column="1"
+                         Grid.Row="2"></TextBox>
+
+                    <TextBlock Text="Brand:"
+                           Height="25"
+                           FontSize="14"
+                           FontFamily="monserrat"
+                           FontWeight="Medium"
+                           Foreground="DarkGray"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="center"
+                           Margin="20 10 0 0"/>
+
+                    <TextBox Text="{Binding CurrentBrand}" 
+                      Name="txtProductBrand"
+                      FontSize="14"
+                      Height="24"
+                      Width="220"
+                      Background="Transparent"
+                      FontWeight="Medium"
+                      FontFamily="Montserrat"                            
+                      Foreground="{StaticResource plainText3}"
+                      CaretBrush="{StaticResource plainText3}"
+                      BorderBrush="{StaticResource plainText3}"
+                      BorderThickness="0,0,0,1"                             
+                      VerticalContentAlignment="Center"
+                      HorizontalAlignment="Right"
+                      Margin="0,0,20,0"
+                      Grid.Column="0"
+                      Grid.Row="2"
+                             IsEnabled="False"></TextBox>
+
+                    <TextBlock Text="Capital ( $ ):"
+                          Height="25"
+                          FontSize="14"
+                          FontFamily="monserrat"
+                          FontWeight="Medium"
+                          Foreground="DarkGray"
+                          Grid.Row="3"
+                          Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="center"
+                          Margin="20 10 0 0"/>
+
+                    <TextBox Text="{Binding CurrentCapital}" 
+                       Name="txtProductCapital"
+                       FontSize="14"
+                       Height="24"
+                       Width="200"
+                       Background="Transparent"
+                       FontWeight="Medium"
+                       FontFamily="Montserrat"                            
+                       Foreground="{StaticResource plainText3}"
+                       CaretBrush="{StaticResource plainText3}"
+                       BorderBrush="{StaticResource plainText3}"
+                       BorderThickness="0,0,0,1"                             
+                       VerticalContentAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Margin="0,0,20,0"
+                       Grid.Column="1"
+                       Grid.Row="3"></TextBox>
+
+                    <TextBlock Text="Sale price ( $ ):"
+                                Height="25"
+                                FontSize="14"
+                                FontFamily="monserrat"
+                                FontWeight="Medium"
+                                Foreground="DarkGray"
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="center"
+                                Margin="20 10 0 0"/>
+
+                    <TextBox Text="{Binding CurrentSalePrice}" 
+                            Name="txtProductSalePrice"
+                            FontSize="14"
+                            Height="24"
+                            Width="180"
+                            Background="Transparent"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat"                            
+                            Foreground="{StaticResource plainText3}"
+                            CaretBrush="{StaticResource plainText3}"
+                            BorderBrush="{StaticResource plainText3}"
+                            BorderThickness="0,0,0,1"                             
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,20,0"
+                            Grid.Column="0"
+                            Grid.Row="3"></TextBox>
+
+                    <Button Command="{Binding ResetInfoCommand}"
+                            Grid.Column="0"
+                            Grid.Row="5"
+                            HorizontalAlignment="Right"
+                            Foreground="White"
+                            Content="Reset"
+                            VerticalAlignment="Center"
+                            Width="100"
+                            Height="35"
+                            Margin="0 0 20 0"
+                            Style="{StaticResource actionButton}">
+                    </Button>
+
+                    <Button Command="{Binding UpdateDetailCommand}"
+                           CommandParameter="{Binding SelectedItem}" 
+                            Grid.Column="1"
+                            Grid.Row="5"
+                            HorizontalAlignment="Center"
+                            Foreground="White"
+                            Content="Update"
+                            VerticalAlignment="Center"
+                            Width="100"
+                            Height="35"
+                            Style="{StaticResource actionButton}">
+                    </Button>
+
+                    <Button Command="{Binding RemoveProductCommand}"
+                            CommandParameter="{Binding SelectedItem}" 
+                            Grid.Column="2"
+                            Grid.Row="5"
+                            HorizontalAlignment="Left"
+                            Foreground="White"
+                            Content="Remove"
+                            VerticalAlignment="Center"
+                            Width="100"
+                            Height="35"
+                            Margin="20 0 0 0"
+                            Style="{StaticResource actionButton}">
+                    </Button>
+
+                    <Button Grid.Column="2"
+                            Grid.Row="1"
+                            Command="{Binding BrowseImageCommand}"
+                            Height="35"
+                            Width="200"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                         VerticalAlignment="Center"
+                            Margin="0 0 0 0">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Plus" 
+                                     Height="25" 
+                                    Width="20" 
+                                    Foreground="{StaticResource plainText3}"/>
+                            <TextBlock Text="Add product image"
+                                   Foreground="{StaticResource plainText3}"
+                                   FontSize="14"
+                                   FontFamily="montserrat"
+                                   FontWeight="Medium"
+                                   Margin="10 0 0 0"
+                                   VerticalAlignment="Center"/>
+                        </StackPanel>
+
+
+
+                    </Button>
+
+                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Width="300"
+                        Height="250"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Source="{Binding CurrentImageSource}" 
+                        d:Source="\Images\Products\legion5.jpeg"
+                        Margin="0,100,0,0" Grid.RowSpan="4"/>
+
+
+                </Grid>
+            </Border>
+        </Grid>
+
+
+    </Grid>
+</UserControl>

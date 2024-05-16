@@ -1,0 +1,609 @@
+﻿<UserControl x:Class="computershop.View.BrandWindowUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:computershop.View"
+             xmlns:viewModel="clr-namespace:computershop.ViewModel"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1000">
+
+    <UserControl.DataContext>
+        <viewModel:BrandViewModel/>
+    </UserControl.DataContext>
+
+    <Grid >
+        <Grid Visibility="{Binding BrandGridVisibility}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="380"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="32*"/>
+                    <ColumnDefinition Width="77*"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Button Grid.Column="2"
+                                Command="{Binding ShowAddViewCommand}"                        
+                                FontSize="12"
+                                FontFamily="Montserrat"
+                                Cursor="Hand"
+                                BorderThickness="0"
+                                Foreground="White"
+                                Width="80"
+                                VerticalAlignment="Center"
+                                Margin="10 0 0 0"
+                        Style="{StaticResource actionButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Plus" 
+  Height="20" 
+ Width="20" 
+ Foreground="white"/>
+                        <TextBlock Text="Add"
+Foreground="white"
+FontFamily="montserrat"
+FontWeight="Medium"
+Margin="10 0 0 0"
+VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
+                </Button>
+
+
+
+                <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2">
+                    <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainText3}"
+                                              Margin="10 0 0 0"
+                                              VerticalAlignment="Bottom"/>
+                    <TextBox Text="{Binding NameOfBrand}" 
+                                FontSize="13"
+                                Height="24"
+                                Width="300"
+                                Background="Transparent"
+                                FontWeight="Medium"
+                                FontFamily="Montserrat"                            
+                                Foreground="{StaticResource plainText3}"
+                                CaretBrush="{StaticResource plainText3}"
+                                BorderBrush="{StaticResource plainText3}"
+                                BorderThickness="0,0,0,1"                             
+                                VerticalContentAlignment="Center"
+                                Margin="5,5,0,0"></TextBox>
+                    <Button Grid.Column="1"
+                            Command="{Binding SearchCommand}"
+                                Content="Search"                            
+                                FontSize="12"
+                                FontFamily="Montserrat"
+                                Cursor="Hand"
+                                BorderThickness="0"
+                                Foreground="White"
+                                Width="80"
+                                Margin="0 0 10 0"
+                                Style="{StaticResource actionButton}"/>
+
+                </StackPanel>
+            </Grid>
+
+            
+
+            <Border Grid.Row="1"
+                        Background="#200F53"
+                        CornerRadius="10" 
+                        Padding="10">
+
+                <ListView 
+                   Background="#200F53"
+                 VerticalAlignment="Center"
+                 BorderThickness="0"
+                   SelectionMode="Single"
+                          Height="360"
+                          ItemsSource="{Binding ListBrands}"
+                          SelectedItem="{Binding SelectedBrand}">
+                    
+                    <ListView.Resources>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Height" Value="30"/>
+                            <Setter Property="Foreground" Value="LightGray"/>
+                            <Setter Property="FontFamily" Value="Montserrat"/>
+                            <Setter Property="FontSize" Value="13"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="DarkBlue"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="LightGray"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="FontFamily" Value="Montserrat"/>
+                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="BorderThickness" Value="2" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <Run Text="#"/>
+                                            <Run Text="{Binding ID}"/>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Brand" DisplayMemberBinding="{Binding Name}" Width="300"/>
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="500"/>
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Border>
+
+            <TextBlock Text="{Binding ErrorMessage}"
+                       Foreground="red"
+                       FontSize="16"
+                       FontWeight="Medium"
+                       FontFamily="montserrat"
+                       TextWrapping="Wrap"
+                       Width="300"
+                       Height="25"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Margin="25 60 0 0"
+                       Grid.Row="1"/>
+            
+            <Grid Grid.Row="2">
+                <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0"
+                    Height="30">
+                    <TextBlock Text="Showing"
+                               FontSize="16"
+FontWeight="Medium"
+FontFamily="Montserrat"
+Foreground="#BCBEE0"
+    Margin="10 0 0 0"
+                               VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding ItemsPerPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+Background="Transparent"
+BorderThickness="01 01 01 1"
+d:Text="?"
+  FontSize="16"
+  FontWeight="Medium"
+  FontFamily="Montserrat"
+  Foreground="#BCBEE0"
+                             Width="30"
+                             VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             CaretBrush="LightGray"
+                             Margin="10 0 0 0"/>
+                    <TextBlock Text="of"
+                               VerticalAlignment="Center"
+                               FontSize="16"
+FontWeight="Medium"
+FontFamily="Montserrat"
+Foreground="#BCBEE0"
+    Margin="10 0 0 0"/>
+
+                    <TextBlock 
+                 Background="Transparent"
+                 d:Text="?"
+                        Text="{Binding TotalItems}"
+                   FontSize="16"
+                   FontWeight="Medium"
+                   FontFamily="Montserrat"
+                   Foreground="#BCBEE0"
+                     Margin="10 0 0 0"
+                   VerticalAlignment="Center"/>
+                    <TextBlock Text="brands"
+                               VerticalAlignment="Center"
+FontSize="16"
+FontWeight="Medium"
+FontFamily="Montserrat"
+Foreground="#BCBEE0"
+    Margin="10 0 0 0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button 
+       BorderThickness="0"
+       Foreground="White"
+       FontSize="12"
+       FontFamily="Montserrat"
+       Cursor="Hand"
+       HorizontalAlignment="Left"
+        VerticalAlignment="Center"
+       Margin="300,0,0,0"
+        Grid.Row ="2"
+        Grid.ColumnSpan="2" Width="80"
+                            Command="{Binding DeleteBrandCommand}"
+                            Style="{StaticResource actionButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="TrashAlt" 
+  Height="20" 
+ Width="20" 
+ Foreground="white"/>
+                            <TextBlock Text="Delete"
+Foreground="white"
+FontFamily="montserrat"
+FontWeight="Medium"
+Margin="10 0 0 0"
+VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button 
+BorderThickness="0"
+Foreground="White"
+FontSize="12"
+FontFamily="Montserrat"
+Cursor="Hand"
+HorizontalAlignment="Right"
+ VerticalAlignment="Center"
+Margin="150,0,0,0"
+ Grid.Column="1"
+ Grid.Row ="2"
+ Grid.ColumnSpan="2"
+                        Command="{Binding ShowUpdateViewCommand}"
+                            Width="80"
+                            Style="{StaticResource actionButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Edit" 
+  Height="20" 
+ Width="20" 
+ Foreground="white"/>
+                            <TextBlock Text="Edit"
+Foreground="white"
+FontFamily="montserrat"
+FontWeight="Medium"
+Margin="10 0 0 0"
+VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="0 0 10 0"
+                    >
+                    <Button
+                            Command="{Binding PrevPageCommand}"
+                            Width="30"
+                        Content="&lt;"
+                    Foreground="White"
+                            Style="{StaticResource actionButton}"/>
+
+                    <TextBlock 
+                     Background="Transparent"
+                     FontSize="16"
+                    FontWeight="Medium"
+                    FontFamily="Montserrat"
+                    Foreground="#BCBEE0"
+                     d:Text="10"
+                        Width="15"
+                     Text="{Binding CurrentPageDisplay}"
+                     HorizontalAlignment="Center"
+                     Margin="10 5 10 5"/>
+                    <TextBlock Text="of" 
+                       Background="Transparent"
+                  FontSize="16"
+                 FontWeight="Medium"
+                 FontFamily="Montserrat"
+                 Foreground="#BCBEE0"
+                               
+                       Margin="10 5 10 5"/>
+                    <TextBlock
+                     Background="Transparent"
+                     Text="{Binding TotalPages}"
+                     FontSize="16"
+                    FontWeight="Medium"
+                    FontFamily="Montserrat"
+                    Foreground="#BCBEE0"
+                     d:Text="10"
+                     Margin="10 5 10 5"
+                     IsEnabled="False"/>
+
+                    <Button 
+                            Command="{Binding NextPageCommand}"
+                            Width="30"
+                    Content="&gt;"
+                    Foreground="White"
+                            Style="{StaticResource actionButton}"/>
+
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+
+        <Grid Visibility="{Binding AddBrandGridVisibility}">
+
+            <Border Grid.Row="1"
+                    Background="#200F53"
+                    CornerRadius="20" 
+                    Padding="50"
+                    BorderBrush="#773DFF"
+                    BorderThickness="2"
+                    Margin="0">
+                <Grid Margin="-40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Command="{Binding BackFromAddViewCommand}"
+                            Grid.Row="0" 
+                            Foreground="White"
+                            Width="30"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource actionButton}">
+                        <fa:IconImage Icon="CircleLeft"
+                                      Height="20"
+                                      Width="20"
+                                      Foreground="White"/>
+                    </Button>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="119*"/>
+                            <ColumnDefinition Width="655*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+                            <TextBlock Text="Brand Name: "
+                                       FontSize="13"
+                                       Height="24"
+                                       Background="Transparent"
+                                       FontWeight="Medium"
+                                       FontFamily="Montserrat"                            
+                                       Foreground="{StaticResource plainText1}"
+                                       Margin="50,10,0,0"/>
+                            <TextBox Text="{Binding NewBrandName}"  
+                                        FontSize="13"
+                                        Height="24"
+                                        Width="200"
+                                        Background="Transparent"
+                                        FontWeight="Medium"
+                                        FontFamily="Montserrat"                            
+                                        Foreground="White"
+                                        CaretBrush="{StaticResource plainText3}"
+                                        BorderBrush="{StaticResource plainText3}"
+                                        BorderThickness="0,0,0,1"                             
+                                        VerticalContentAlignment="Center"
+                                        Margin="5,5,0,0">
+                            </TextBox>
+
+
+                            <TextBlock Text="Description: "
+                                   FontSize="13"
+                                    Height="24"
+                                    Background="Transparent"
+                                    FontWeight="Medium"
+                                    FontFamily="Montserrat"                            
+                                    Foreground="{StaticResource plainText1}"
+                                    Margin="50,10,0,0"/>
+
+                            <TextBox Text="{Binding NewBrandDescription}"
+                                    FontSize="13"
+                                    Height="24"
+                                    Width="200"
+                                    Background="Transparent"
+                                    FontWeight="Medium"
+                                    FontFamily="Montserrat"                            
+                                    Foreground="White"
+                                    CaretBrush="{StaticResource plainText3}"
+                                    BorderBrush="{StaticResource plainText3}"
+                                    BorderThickness="0,0,0,1"                             
+                                    VerticalContentAlignment="Center"
+                                    Margin="5,5,0,0">
+                            </TextBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <TextBlock Text="{Binding AddViewErrorMessage}"
+           Foreground="red"
+           FontSize="16"
+           FontWeight="Medium"
+           FontFamily="montserrat"
+           TextWrapping="Wrap"
+           Width="500"
+           Height="25"
+           VerticalAlignment="Top"
+           HorizontalAlignment="Left"
+           Margin="50,50,0,0"/>
+                        
+                        <TextBlock Text="{Binding AddViewSuccessMessage}"
+           Foreground="LawnGreen"
+           FontSize="16"
+           FontWeight="Medium"
+           FontFamily="montserrat"
+           TextWrapping="Wrap"
+           Width="500"
+           Height="25"
+           VerticalAlignment="Top"
+           HorizontalAlignment="Left"
+           Margin="50,50,0,0"/>
+                        
+                        <Button
+            BorderThickness="0"
+            Content="ADD"
+            Foreground="White"
+            FontSize="12"
+            FontFamily="Montserrat"
+            Cursor="Hand"
+            Grid.Column="2"
+                                Width="100"
+            HorizontalAlignment="Left"
+            Margin="50,0,0,0"
+Command="{Binding AddNewBrandCommand}"
+                                Style="{StaticResource actionButton}"/>
+
+
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid Visibility="{Binding UpdateBrandGridVisibility}">
+
+            <Border Grid.Row="1"
+            Background="#200F53"
+            CornerRadius="20" 
+            Padding="50"
+            BorderBrush="#773DFF"
+            BorderThickness="5"
+            Margin="0">
+                <Grid Margin="-30">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Command="{Binding BackFromUpdateViewCommand}"
+                       Grid.Row="0" 
+                       Grid.Column="2" 
+                       Foreground="White"
+                       Width="30"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                            Style="{StaticResource actionButton}">
+                        <fa:IconImage Icon="CircleLeft" Width="20"
+                                     Height="20" Foreground="White"/>
+
+                    </Button>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="119*"/>
+                            <ColumnDefinition Width="655*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+                            <TextBlock Text="Brand Name: "
+                               FontSize="13"
+                               Height="24"
+                               Background="Transparent"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                            
+                               Foreground="{StaticResource plainText1}"
+                               Margin="50,10,0,0"/>
+                            <TextBox Text="{Binding UpdateBrandName}"  
+                                FontSize="13"
+                                Height="24"
+                                Width="200"
+                                Background="Transparent"
+                                FontWeight="Medium"
+                                FontFamily="Montserrat"                            
+                                Foreground="White"
+                                CaretBrush="{StaticResource plainText3}"
+                                BorderBrush="{StaticResource plainText3}"
+                                BorderThickness="0,0,0,1"                             
+                                VerticalContentAlignment="Center"
+                                Margin="5,5,0,0"
+                                     IsEnabled="False">
+                                
+                            </TextBox>
+
+
+                            <TextBlock Text="Description: "
+                           FontSize="13"
+                            Height="24"
+                            Background="Transparent"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat"                            
+                            Foreground="{StaticResource plainText1}"
+                            Margin="50,10,0,0"/>
+
+                            <TextBox Text="{Binding UpdateBrandDescription}"
+                            FontSize="13"
+                            Height="24"
+                            Width="200"
+                            Background="Transparent"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat"                            
+                            Foreground="White"
+                            CaretBrush="{StaticResource plainText3}"
+                            BorderBrush="{StaticResource plainText3}"
+                            BorderThickness="0,0,0,1"                             
+                            VerticalContentAlignment="Center"
+                            Margin="5,5,0,0">
+                            </TextBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <TextBlock Text="{Binding UpdateViewErrorMessage}"
+Foreground="red"
+FontSize="16"
+FontWeight="Medium"
+FontFamily="montserrat"
+TextWrapping="Wrap"
+Width="500"
+Height="25"
+VerticalAlignment="Top"
+HorizontalAlignment="Left"
+Margin="50,50,0,0"/>
+
+                        <TextBlock Text="{Binding UpdateViewSuccessMessage}"
+Foreground="LawnGreen"
+FontSize="16"
+FontWeight="Medium"
+FontFamily="montserrat"
+TextWrapping="Wrap"
+Width="500"
+Height="25"
+VerticalAlignment="Top"
+HorizontalAlignment="Left"
+Margin="50,50,0,0"/>
+                        <Button  BorderThickness="0"
+    Content="UPDATE"
+    Foreground="White"
+    FontSize="12"
+    FontFamily="Montserrat"
+    Cursor="Hand"
+    Grid.Column="2"
+    HorizontalAlignment="Left"
+    Margin="50,0,0,0"
+    Command="{Binding UpdateBrandDetailCommand}"
+                                Width="100"
+                                Style="{StaticResource actionButton}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+    </Grid>
+
+
+</UserControl>
