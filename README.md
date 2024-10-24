@@ -44,9 +44,6 @@
 ## Weakness:
 This project still has some mistakes and needs to be improved. 'Save password' and 'Forgotten password' doesn't complete.
 
-## Self-rating:
-- 21127080 - Nguyễn Đắc Khôi: 9.5
-- 21127647 - Lê Nguyễn Phương Nam: 9.5
 
 ## Link demo:
-https://youtu.be/RBKoqpZkV5A
+https://youtu.be/BBVSqim5JzQ
